@@ -1,0 +1,65 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders.CreateModel
+@{
+    ViewData["Title"] = "Je Winkelwagen";
+}
+
+<h1>🛍️ Je Winkelwagen</h1>
+
+@if (Model.Winkelwagen.Any())
+{
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Product</th>
+                <th>Categorie</th>
+                <th>Prijs</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Winkelwagen)
+            {
+                <tr>
+                    <td>@product.ProductName</td>
+                    <td>@product.Category</td>
+                    <td>€ @product.Price.ToString("0.00")</td>
+                    <td>
+                        <!-- eventueel: knop voor verwijderen -->
+                        <!--<form method="post" asp-page-handler="Remove" asp-route-id="@product.ProductID">
+                            <button class="btn btn-sm btn-outline-danger">Verwijderen</button>
+                        </form>-->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><strong>Totaal:</strong> € @Model.Winkelwagen.Sum(p => p.Price).ToString("0.00")</p>
+
+    <button class="btn btn-primary">Bestelling Plaatsen</button>
+}
+else
+{
+    <div class="alert alert-info">
+        Je winkelwagen is leeg. Ga naar <a asp-page="/Products/Index">producten</a> om iets toe te voegen.
+    </div>
+}
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>

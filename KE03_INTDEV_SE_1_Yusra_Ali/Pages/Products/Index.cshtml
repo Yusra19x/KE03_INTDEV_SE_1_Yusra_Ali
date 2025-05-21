@@ -1,0 +1,62 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Yusra_Ali.Pages.Products.IndexModel
+@{
+    ViewData["Title"] = "Producten";
+}
+
+<h1>Beschikbare Producten</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Afbeelding</th>
+            <th>Productnaam</th>
+            <th>Merk</th>
+            <th>Voorraad</th>
+            <th>Prijs (€)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>
+                    <img src="@product.ImageUrl" alt="@product.ProductName" width="100" />
+                </td>
+                <td>@product.ProductName</td>
+                <td>@product.Category</td>
+                <td>@product.Stock</td>
+                <td>@product.Price.ToString("0.00")</td>
+                <td>
+                    <a asp-page="/Orders/Create" asp-route-add="@product.ProductID" class="btn btn-outline-dark">
+                        <i class="bi bi-cart-plus"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+</style>

@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KE03_INTDEV_SE_1_Yusra_Ali", "KE03_INTDEV_SE_1_Yusra_Ali\KE03_INTDEV_SE_1_Yusra_Ali.csproj", "{DA65C2C0-99FF-4129-973A-A8949EDCAE5F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4E2FDC14-72C2-46A6-8829-65C81457824B} = {4E2FDC14-72C2-46A6-8829-65C81457824B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{4E2FDC14-72C2-46A6-8829-65C81457824B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{DA65C2C0-99FF-4129-973A-A8949EDCAE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA65C2C0-99FF-4129-973A-A8949EDCAE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA65C2C0-99FF-4129-973A-A8949EDCAE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E2FDC14-72C2-46A6-8829-65C81457824B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E2FDC14-72C2-46A6-8829-65C81457824B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E2FDC14-72C2-46A6-8829-65C81457824B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E2FDC14-72C2-46A6-8829-65C81457824B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

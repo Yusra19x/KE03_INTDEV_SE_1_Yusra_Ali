@@ -1,0 +1,50 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders.HistoryModel
+@{
+    ViewData["Title"] = "Ordergeschiedenis";
+}
+
+<h2>Ordergeschiedenis</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Datum</th>
+            <th>Producten</th>
+            <th>Totaalbedrag</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>001</td>
+            <td>14 mei 2025</td>
+            <td>2x Toetsenbord, 1x Muis</td>
+            <td>€ 74,97</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>13 mei 2025</td>
+            <td>1x Monitor</td>
+            <td>€ 149,99</td>
+        </tr>
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 0.75rem;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
