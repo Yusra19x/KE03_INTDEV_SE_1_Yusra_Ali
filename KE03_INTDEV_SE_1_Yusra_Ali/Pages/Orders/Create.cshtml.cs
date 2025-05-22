@@ -43,8 +43,8 @@ namespace KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders
                 var nieuweOrder = new Order
                 {
                     ProductName = product.ProductName,
-                    Quantity = 1, // of van winkelwagen
-                    Price = product.Price,
+                    Quantity = product.Quantity,
+                    Price = product.Price * product.Quantity,
                     Address = "Adres invullen of opvragen",
                     Date = DateTime.Now,
                     CustomerId = 1 // Dummy of ingelogde klant
@@ -69,6 +69,35 @@ namespace KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders
             if (teVerwijderen != null)
             {
                 winkelwagen.Remove(teVerwijderen);
+            }
+
+            HttpContext.Session.SetString("Winkelwagen", JsonSerializer.Serialize(winkelwagen));
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostIncrease(int productId)
+        {
+            return UpdateQuantity(productId, +1);
+        }
+
+        public IActionResult OnPostDecrease(int productId)
+        {
+            return UpdateQuantity(productId, -1);
+        }
+
+        private IActionResult UpdateQuantity(int productId, int verschil)
+        {
+            var winkelwagenJson = HttpContext.Session.GetString("Winkelwagen");
+            var winkelwagen = string.IsNullOrEmpty(winkelwagenJson)
+                ? new List<Product>()
+                : JsonSerializer.Deserialize<List<Product>>(winkelwagenJson);
+
+            var item = winkelwagen.FirstOrDefault(p => p.ProductID == productId);
+            if (item != null)
+            {
+                item.Quantity += verschil;
+                if (item.Quantity < 1)
+                    item.Quantity = 1; // ondergrens: minimaal 1
             }
 
             HttpContext.Session.SetString("Winkelwagen", JsonSerializer.Serialize(winkelwagen));

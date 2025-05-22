@@ -11,7 +11,8 @@
         <tr>
             <th>Order ID</th>
             <th>Datum</th>
-            <th>Producten</th>
+            <th>Product</th>
+            <th>Aantal</th>
             <th>Totaalbedrag</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
                 <td>@order.ID</td>
                 <td>@order.Date.ToString("dd MMMM yyyy")</td>
                 <td>@order.ProductName</td>
+                <td>@order.Quantity</td>
                 <td>€ @order.Price.ToString("0.00")</td>
             </tr>
         }
