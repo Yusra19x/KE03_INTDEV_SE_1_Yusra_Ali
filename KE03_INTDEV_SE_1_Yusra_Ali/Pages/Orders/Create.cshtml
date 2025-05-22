@@ -37,7 +37,9 @@
 
     <p><strong>Totaal:</strong> € @Model.Winkelwagen.Sum(p => p.Price).ToString("0.00")</p>
 
-    <button class="btn btn-primary">Bestelling Plaatsen</button>
+    <form method="post">
+        <button type="submit" class="btn btn-primary">Bestelling plaatsen</button>
+    </form>
 }
 else
 {

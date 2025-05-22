@@ -8,37 +8,54 @@ namespace KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders
 {
     public class CreateModel : PageModel
     {
-        private readonly IProductRepository _productRepo;
+        private readonly IOrderRepository _orderRepository;
 
         public List<Product> Winkelwagen { get; set; } = new();
 
-        public CreateModel(IProductRepository productRepo)
+        public CreateModel(IOrderRepository orderRepository)
         {
-            _productRepo = productRepo;
+            _orderRepository = orderRepository;
         }
 
-        public IActionResult OnGet(int? add)
+        public void OnGet()
         {
-            // Session ophalen of nieuwe lijst maken
-            var cartJson = HttpContext.Session.GetString("Cart");
-            var cart = string.IsNullOrEmpty(cartJson)
-                ? new List<int>()
-                : JsonSerializer.Deserialize<List<int>>(cartJson)!;
+            var winkelwagenJson = HttpContext.Session.GetString("Winkelwagen");
+            Winkelwagen = string.IsNullOrEmpty(winkelwagenJson)
+                ? new List<Product>()
+                : JsonSerializer.Deserialize<List<Product>>(winkelwagenJson);
+        }
 
-            // Als er een product wordt toegevoegd
-            if (add.HasValue)
+        public IActionResult OnPost()
+        {
+            // Simuleer ophalen van winkelwagen producten
+            var winkelwagenJson = HttpContext.Session.GetString("Winkelwagen");
+            var winkelwagen = string.IsNullOrEmpty(winkelwagenJson)
+                ? new List<Product>()
+                : JsonSerializer.Deserialize<List<Product>>(winkelwagenJson);
+
+            if (winkelwagen == null || !winkelwagen.Any())
             {
-                cart.Add(add.Value);
-                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(cart));
+                return RedirectToPage("/Products/Index"); // Niks te bestellen
             }
 
-            // Haal de producten op op basis van ID's
-            Winkelwagen = cart
-                .Select(id => _productRepo.GetProductById(id))
-                .Where(p => p != null)
-                .ToList();
+            foreach (var product in winkelwagen)
+            {
+                var nieuweOrder = new Order
+                {
+                    ProductName = product.ProductName,
+                    Quantity = 1, // of van winkelwagen
+                    Price = product.Price,
+                    Address = "Adres invullen of opvragen",
+                    Date = DateTime.Now,
+                    CustomerId = 1 // Dummy of ingelogde klant
+                };
 
-            return Page();
+                _orderRepository.CreateOrder(nieuweOrder);
+            }
+
+            HttpContext.Session.Remove("Winkelwagen");
+
+            return RedirectToPage("/Orders/History");
         }
     }
 }

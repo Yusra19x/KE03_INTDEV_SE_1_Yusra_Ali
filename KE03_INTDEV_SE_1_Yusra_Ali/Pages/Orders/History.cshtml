@@ -16,18 +16,15 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>001</td>
-            <td>14 mei 2025</td>
-            <td>2x Toetsenbord, 1x Muis</td>
-            <td>€ 74,97</td>
-        </tr>
-        <tr>
-            <td>002</td>
-            <td>13 mei 2025</td>
-            <td>1x Monitor</td>
-            <td>€ 149,99</td>
-        </tr>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.ID</td>
+                <td>@order.Date.ToString("dd MMMM yyyy")</td>
+                <td>@order.ProductName</td>
+                <td>€ @order.Price.ToString("0.00")</td>
+            </tr>
+        }
     </tbody>
 </table>
 

@@ -29,9 +29,11 @@
                 <td>@product.Stock</td>
                 <td>@product.Price.ToString("0.00")</td>
                 <td>
-                    <a asp-page="/Orders/Create" asp-route-add="@product.ProductID" class="btn btn-outline-dark">
-                        <i class="bi bi-cart-plus"></i>
-                    </a>
+                    <form method="post" asp-page-handler="AddToCart" asp-route-productId="@product.ProductID">
+                        <button type="submit" class="btn btn-outline-dark">
+                            <i class="bi bi-cart-plus"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
         }
