@@ -25,10 +25,9 @@
                     <td>@product.Category</td>
                     <td>€ @product.Price.ToString("0.00")</td>
                     <td>
-                        <!-- eventueel: knop voor verwijderen -->
-                        <!--<form method="post" asp-page-handler="Remove" asp-route-id="@product.ProductID">
-                            <button class="btn btn-sm btn-outline-danger">Verwijderen</button>
-                        </form>-->
+                        <form method="post" asp-page-handler="Remove" asp-route-productId="@product.ProductID" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-danger" title="Verwijder uit winkelwagen">🗑️</button>
+                        </form>
                     </td>
                 </tr>
             }

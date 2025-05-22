@@ -57,5 +57,22 @@ namespace KE03_INTDEV_SE_1_Yusra_Ali.Pages.Orders
 
             return RedirectToPage("/Orders/History");
         }
+
+        public IActionResult OnPostRemove(int productId)
+        {
+            var winkelwagenJson = HttpContext.Session.GetString("Winkelwagen");
+            var winkelwagen = string.IsNullOrEmpty(winkelwagenJson)
+                ? new List<Product>()
+                : JsonSerializer.Deserialize<List<Product>>(winkelwagenJson);
+
+            var teVerwijderen = winkelwagen.FirstOrDefault(p => p.ProductID == productId);
+            if (teVerwijderen != null)
+            {
+                winkelwagen.Remove(teVerwijderen);
+            }
+
+            HttpContext.Session.SetString("Winkelwagen", JsonSerializer.Serialize(winkelwagen));
+            return RedirectToPage();
+        }
     }
 }
